@@ -2,6 +2,7 @@ var assert = require('assert');
 var restify = require('restify');
 var request = require('request');
 
+// Test Host
 var server = restify.createServer({
   name: 'hobby-test',
   version: '0.0.1',
@@ -27,8 +28,13 @@ server.listen(3001, '127.0.0.1', function () {
   console.log('%s listening at %s', server.name, server.url);
 });
 
+// Test Target
+process.env['HOBBY_ADDR'] = '127.0.0.1';
+process.env['HOBBY_PORT'] = 3000;
+
 var hobby = require('../server');
 
+// Test Jobs
 setTimeout(function () {
   var taskUrl = {
     method: 'PUT',

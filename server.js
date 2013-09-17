@@ -16,7 +16,7 @@ var restify = require('restify');
 // TODO: inject engine into server context
 var engine = require('./lib/engine');
 
-var server = module.exports = exports = restify.createServer({
+var server = restify.createServer({
   name: 'hobby',
   version: '0.0.1',
 });
@@ -35,19 +35,18 @@ require('./routes/task').listen(server);
 
 //app.jobs = dao.query('jobs');
 
-server.listen(3000, '127.0.0.1', function () {
+var addr = process.env['HOBBY_ADDR'] || '0.0.0.0';
+var port = process.env['HOBBY_PORT'] || 3000;
+
+server.listen(port, addr, function () {
   console.log('%s listening at %s', server.name, server.url);
 });
 
 /**
-  - Sched: One time, Real time, Delay, Period (like Cron, start-end range with minimal requests)
-  - Execute: Sync/Async(with `callback`)
-  - Delta Interface
-  - Support per-agent of per-target-host
   * Support `If-Modified-Since`?
   * Support crash restore...
 
-  $res = $hobby->post('job', {
+  $res = $hobby->post('task', {
     'name' => 'g-match-1'
     'uri' => 'http://122.226.84.75:8080/GlobalBasketBallCenter/DataInterface/ScheduleService/GetDateScheduleList?format=json&part=hupu&partkey=55044038AB7F4D4819B9A011226A0D10&random=1',
     'callback' => 'http://g.hupu.com/api/beitai/',
@@ -55,19 +54,19 @@ server.listen(3000, '127.0.0.1', function () {
     'crontab' => '* * * * * *',
   });
 
-  $res = $hobby->post('job', {
-    'name' => 'g-match-1'
+  $res = $hobby->post('task', {
+    'name' => 'g-match-2'
     'url' => 'http://122.226.84.75:8080/GlobalBasketBallCenter/DataInterface/ScheduleService/GetDateScheduleList?format=json&part=hupu&partkey=55044038AB7F4D4819B9A011226A0D10&random=1',
     'callback' => 'http://g.hupu.com/api/beitai/',
     'patch' => ['beitai'],
     'period' => 100ms,
   });
 
-  $hobby->patch('job/1', {
+  $hobby->patch('task/1', {
     'callback' => '',
   });
 
-  $hobby->patch('job/1', {
+  $hobby->patch('task/1', {
     'period' => 120
   });
  */
