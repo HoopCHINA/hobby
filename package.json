@@ -1,8 +1,8 @@
 {
-  "name": "node-hobby-beitai",
+  "name": "hobby",
   "version": "0.0.1",
-  "description": "hobby beitai plugin",
-  "main": "server.js",
+  "description": "Hobby Server",
+  "main": "server",
   "dependencies": {
     "restify": "~2.6.0",
     "sqlite3": "~2.1.15",
@@ -13,7 +13,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "repository": "",
-  "author": "",
+  "repository": "https://github.com/HoopCHINA/hobby.git",
+  "author": "Wang Wenlin",
   "license": "BSD"
 }
