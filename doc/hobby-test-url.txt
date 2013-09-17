@@ -1,0 +1,1 @@
+http://122.226.84.75:8080/GlobalBasketBallCenter/DataInterface/ScheduleService/GetDateScheduleList?format=json&part=hupu&partkey=55044038AB7F4D4819B9A011226A0D10&random=1&leagueID=1&month=10&day=23
