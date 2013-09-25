@@ -2,21 +2,22 @@
 
 var engine = require('../lib/engine');
 
-exports.listen = function (server) {
-  server.get('/tasks', listTasks);
-  server.put('/task/:name', createTask);
-  server.get('/task/:name', showTask);
-  server.get('/task/:name/test', testTask);
-  server.get('/task/:name/run', runTask);
-  server.del('/task/:name', delTask);
-};
+/**
+  $hobby->patch('task/1', {
+    'callback' => '',
+  });
 
-function listTasks(req, res, next) {
+  $hobby->patch('task/1', {
+    'period' => 120
+  });
+ */
+
+exports.listTasks = function (req, res, next) {
   res.send(engine.list());
   return next();
 }
 
-function createTask(req, res, next) {
+exports.createTask = function (req, res, next) {
   var name = req.params.name;
   var task = req.body || {};
 
@@ -30,7 +31,7 @@ function createTask(req, res, next) {
   }
 }
 
-function showTask(req, res, next) {
+exports.showTask = function (req, res, next) {
   try {
     res.send(engine.get(req.params.name));
   }
@@ -40,7 +41,7 @@ function showTask(req, res, next) {
   }
 }
 
-function testTask(req, res, next) {
+exports.testTask = function (req, res, next) {
   try {
     engine.test(req.params.name, function (err, headers, body, modified) {
       if (err)
@@ -55,7 +56,7 @@ function testTask(req, res, next) {
   }
 }
 
-function runTask(req, res, next) {
+exports.runTask = function (req, res, next) {
   try {
     engine.run(req.params.name, function (err, headers, body, modified) {
       if (err)
@@ -70,7 +71,7 @@ function runTask(req, res, next) {
   }
 }
 
-function delTask(req, res, next) {
+exports.delTask = function (req, res, next) {
   try {
     engine.del(req.params.name);
     res.send('+OK');
