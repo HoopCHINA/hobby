@@ -6,7 +6,6 @@
   "dependencies": {
     "restify": "~2.6.0",
     "request": "~2.27.0",
-    "cron": "~1.0.1",
     "level": "~0.16.0"
   },
   "devDependencies": {},
