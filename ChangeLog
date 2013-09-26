@@ -4,6 +4,7 @@ Features:
 * Add `leveldb` based persistence
 * Add auto-drop task feature
 * Add 'replace' task feature
+* Add request 'retry' feature
 
 Bugfix:
 * Fix persistence issues
