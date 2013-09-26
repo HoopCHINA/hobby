@@ -18,7 +18,7 @@ server.pre(restify.pre.sanitizePath());
 server.use(restify.acceptParser(server.acceptable));
 server.use(restify.bodyParser({ mapParams: false }));
 
-// Bootstrap
+// Services
 require('./lib/tasks').bootstrap();
 // Routes
 require('./routes')(server);

@@ -1,0 +1,10 @@
+2013.09.26, Version 0.0.2
+
+Features:
+* Add `leveldb` based persistence
+* Add auto-drop task feature
+* Add 'replace' task feature
+
+Bugfix:
+* Fix persistence issues
+* Fix `cron` month error
