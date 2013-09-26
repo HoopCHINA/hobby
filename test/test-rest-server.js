@@ -1,3 +1,5 @@
+/* test-rest-server.js */
+
 var assert = require('assert');
 var restify = require('restify');
 var request = require('request');
