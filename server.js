@@ -1,19 +1,25 @@
 var restify = require('restify');
+var http = require('http');
+var https = require('https');
 
-// TODO: manual set http/https agent maxSockets to 5, for node 0.12+
+// Manual set `maxSockets` to 10 for limit concurrents
+http.globalAgent.maxSockets = 10;
+https.globalAgent.maxSockets = 10;
 
 var addr = process.env['HOBBY_ADDR'] || '0.0.0.0';
 var port = process.env['HOBBY_PORT'] || 3000;
 
 var server = restify.createServer({
   name: 'hobby',
-  version: '0.0.1',
+  version: '0.0.2',
 });
 
 server.pre(restify.pre.sanitizePath());
 server.use(restify.acceptParser(server.acceptable));
 server.use(restify.bodyParser({ mapParams: false }));
 
+// Bootstrap
+require('./lib/tasks').bootstrap();
 // Routes
 require('./routes')(server);
 

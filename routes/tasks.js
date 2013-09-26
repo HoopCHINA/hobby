@@ -1,8 +1,9 @@
-/* task.js */
+/* tasks.js */
 
-var engine = require('../lib/engine');
+var tasks = require('../lib/tasks');
 
 /**
+  TODO add patch support
   $hobby->patch('task/1', {
     'callback' => '',
   });
@@ -13,16 +14,13 @@ var engine = require('../lib/engine');
  */
 
 exports.listTasks = function (req, res, next) {
-  res.send(engine.list());
+  res.send(tasks.list());
   return next();
 }
 
 exports.createTask = function (req, res, next) {
-  var name = req.params.name;
-  var task = req.body || {};
-
   try {
-    engine.create(name, task);
+    tasks.create(req.params.name, req.body || {});
     res.send('+OK');
   }
   catch (e) {
@@ -31,19 +29,30 @@ exports.createTask = function (req, res, next) {
   }
 }
 
-exports.showTask = function (req, res, next) {
+exports.replaceTask = function (req, res, next) {
   try {
-    res.send(engine.get(req.params.name));
+    tasks.replace(req.params.name, req.body || {});
+    res.send('+OK');
   }
   catch (e) {
-    // TODO use Error
+    // TODO use restify HttpError
+    res.send(422, e);
+  }
+}
+
+exports.getTask = function (req, res, next) {
+  try {
+    res.send(tasks.get(req.params.name));
+  }
+  catch (e) {
+    // TODO use restify HttpError
     res.send(404, e);
   }
 }
 
 exports.testTask = function (req, res, next) {
   try {
-    engine.test(req.params.name, function (err, headers, body, modified) {
+    tasks.test(req.params.name, function (err, headers, body, modified) {
       if (err)
         res.send(err);
       else
@@ -51,14 +60,14 @@ exports.testTask = function (req, res, next) {
     });
   }
   catch (e) {
-    // TODO use Error
+    // TODO use restify HttpError
     res.send(404, e);
   }
 }
 
 exports.runTask = function (req, res, next) {
   try {
-    engine.run(req.params.name, function (err, headers, body, modified) {
+    tasks.run(req.params.name, function (err, headers, body, modified) {
       if (err)
         res.send(err);
       else
@@ -66,17 +75,18 @@ exports.runTask = function (req, res, next) {
     });
   }
   catch (e) {
-    // TODO use Error
+    // TODO use restify HttpError
     res.send(404, e);
   }
 }
 
-exports.delTask = function (req, res, next) {
+exports.removeTask = function (req, res, next) {
   try {
-    engine.del(req.params.name);
+    tasks.del(req.params.name);
     res.send('+OK');
   }
   catch (e) {
+    // TODO use restify HttpError
     res.send(e);
   }
 }

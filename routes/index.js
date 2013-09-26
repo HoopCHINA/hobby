@@ -1,15 +1,15 @@
 /* index.js */
 
-var task = require('./task');
+var tasks = require('./tasks');
 
-module.exports = exports = function (server) {
-  // Task
-  server.get('/tasks', task.listTasks);
-  server.put('/task/:name', task.createTask);
-  server.get('/task/:name', task.showTask);
-  server.get('/task/:name/test', task.testTask);
-  server.get('/task/:name/run', task.runTask);
-  server.del('/task/:name', task.delTask);
-  //server.post('/task/:name', task.creatTask);
-  //server.patch('/task/:name', task.patchTask);
+module.exports = function (server) {
+  // Tasks
+  server.get('/tasks', tasks.listTasks);
+  server.post('/task/:name', tasks.createTask);
+  server.put('/task/:name', tasks.replaceTask);
+  server.get('/task/:name', tasks.getTask);
+  server.get('/task/:name/test', tasks.testTask);
+  server.get('/task/:name/run', tasks.runTask);
+  server.del('/task/:name', tasks.removeTask);
+  //server.patch('/task/:name', tasks.patchTask);
 };
