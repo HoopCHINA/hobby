@@ -1,7 +1,5 @@
 # directories
 node_modules/
-db/
-log/
 
 # vim temp files
 .*.sw*
