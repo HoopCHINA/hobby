@@ -1,2 +1,41 @@
-#!/usr/bin/env node
+#!/bin/bash
+
+BINPATH=`dirname "$0"`
+SRCPATH=`dirname $BINPATH`
+LOGPATH=$SRCPATH/var/log
+
+# Bind on LAN
 HOBBY_ADDR="127.0.0.1"
+export HOBBY_ADDR
+
+# Functions
+start() {
+  LOGFILE=$LOGPATH/hobby.log
+  ERRFILE=$LOGPATH/hobby.err
+  forever start -l $LOGFILE -e $ERRFILE -a --sourceDir=$SRCPATH server.js
+}
+
+stop() {
+  forever stop --sourceDir=$SRCPATH server.js
+}
+
+restart() {
+  stop
+  start
+}
+
+# Entry
+case "$1" in
+  start)
+    start
+    ;;
+  stop)
+    stop
+    ;;
+  restart)
+    restart
+    ;;
+  *)
+    echo $"Usage: $0 {start|stop|restart}"
+    exit 2
+esac
