@@ -1,1 +1,2 @@
 #!/usr/bin/env node
+HOBBY_ADDR="127.0.0.1"
