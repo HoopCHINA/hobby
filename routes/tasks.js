@@ -14,8 +14,12 @@ var tasks = require('../lib/tasks');
  */
 
 exports.listTasks = function (req, res, next) {
-  res.send(tasks.list());
-  return next();
+  try {
+    res.send(tasks.list());
+  } catch (e) {
+    // TODO use restify HttpError
+    res.send(e);
+  }
 }
 
 exports.createTask = function (req, res, next) {
