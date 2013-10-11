@@ -1,22 +1,25 @@
 #!/bin/bash
 
-BINPATH=`dirname "$0"`
-SRCPATH=`dirname $BINPATH`
-LOGPATH=$SRCPATH/var/log
+# Detect source path
+if [ $(uname) = 'Linux' ]; then
+  BINFILE=`readlink -f "$0"`
+else
+  BINFILE=`node -e "process.stdout.write(require('fs').realpathSync('${0}'));"`
+fi
 
-# Bind on LAN
-HOBBY_ADDR="127.0.0.1"
-export HOBBY_ADDR
+BINPATH=`dirname "$BINFILE"`
+SRCPATH=`dirname "$BINPATH"`
+LOGPATH="$SRCPATH/var/log"
 
 # Functions
 start() {
-  LOGFILE=$LOGPATH/hobby.log
-  ERRFILE=$LOGPATH/hobby.err
-  forever start -l $LOGFILE -e $ERRFILE -a --sourceDir=$SRCPATH server.js
+  LOGFILE="$LOGPATH/hobby.log"
+  ERRFILE="$LOGPATH/hobby.err"
+  forever start -l "$LOGFILE" -e "$ERRFILE" -a --sourceDir="$SRCPATH" server.js
 }
 
 stop() {
-  forever stop --sourceDir=$SRCPATH server.js
+  forever stop --sourceDir="$SRCPATH" server.js
 }
 
 restart() {
@@ -24,7 +27,7 @@ restart() {
   start
 }
 
-# Entry
+# Main
 case "$1" in
   start)
     start
@@ -36,6 +39,6 @@ case "$1" in
     restart
     ;;
   *)
-    echo $"Usage: $0 {start|stop|restart}"
+    echo "Usage: $0 {start|stop|restart}"
     exit 2
 esac
