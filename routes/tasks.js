@@ -71,7 +71,24 @@ exports.testTask = function (req, res, next) {
 
 exports.runTask = function (req, res, next) {
   try {
-    tasks.run(req.params.name, function (err, headers, body, modified) {
+    var opt = {};
+
+    switch (req.params.opt) {
+      case 'async':
+        opt.async = true;
+        break;
+
+      case 'force':
+        opt.force = true;
+        break;
+
+      case 'async-force':
+        opt.async = true;
+        opt.force = true;
+        break;
+    }
+
+    tasks.run(req.params.name, opt, function (err, headers, body, modified) {
       if (err)
         res.send(err);
       else
