@@ -1,5 +1,9 @@
 # directories
-node_modules/
+/node_modules
+/var/db
+!/var/db/.empty
+/var/log
+!/var/log/.empty
 
 # vim temp files
 .*.sw*
