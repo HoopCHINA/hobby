@@ -1,10 +1,10 @@
 {
   "name": "g-test2",
-  "url": "http://122.226.84.75:8080/GlobalBasketBallCenter/DataInterface/LiveService/GetEventsByTopNumberOrSeqNumber?format=json&part=hupu&partkey=55044038AB7F4D4819B9A011226A0D10&random=1&scheduleID=1242751&seqNumber=0&TopNumber=20",
+  "url": "http://122.226.84.75:8080/GlobalBasketBallCenter/DataInterface/LiveService/GetEventsByTopNumberOrSeqNumber?format=json&part=hupu&partkey=55044038AB7F4D4819B9A011226A0D10&random=1&scheduleID=1242751&seqNumber=0&TopNumber=100",
   "callback": "http://127.0.0.1:3001/callback",
   "timeout": 15,
   "retry": 3,
-  "urlTemplate": "http://122.226.84.75:8080/GlobalBasketBallCenter/DataInterface/LiveService/GetEventsByTopNumberOrSeqNumber?format=json&part=hupu&partkey=55044038AB7F4D4819B9A011226A0D10&random=1&scheduleID=1242751&seqNumber={:seq}&TopNumber=20",
+  "urlTemplate": "http://122.226.84.75:8080/GlobalBasketBallCenter/DataInterface/LiveService/GetEventsByTopNumberOrSeqNumber?format=json&part=hupu&partkey=55044038AB7F4D4819B9A011226A0D10&random=1&scheduleID=1242751&seqNumber={:seq}&TopNumber=100",
   "patch": "beitai",
   "cron": "* * * * * *"
 }
