@@ -1,6 +1,7 @@
 /* index.js */
 
 var tasks = require('./tasks');
+var monit = require('./monit');
 
 module.exports = function (server) {
   // Tasks
@@ -13,4 +14,7 @@ module.exports = function (server) {
   server.get('/task/:name/run/:opt', tasks.runTask);
   server.del('/task/:name', tasks.removeTask);
   //server.patch('/task/:name', tasks.patchTask);
+
+  // Stats
+  server.get('/stats', monit.stats);
 };

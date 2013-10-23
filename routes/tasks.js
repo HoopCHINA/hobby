@@ -20,7 +20,7 @@ exports.listTasks = function (req, res, next) {
     // TODO use restify HttpError
     res.send(e);
   }
-}
+};
 
 exports.createTask = function (req, res, next) {
   try {
@@ -31,7 +31,7 @@ exports.createTask = function (req, res, next) {
     // TODO use restify HttpError
     res.send(422, e);
   }
-}
+};
 
 exports.replaceTask = function (req, res, next) {
   try {
@@ -42,7 +42,7 @@ exports.replaceTask = function (req, res, next) {
     // TODO use restify HttpError
     res.send(422, e);
   }
-}
+};
 
 exports.getTask = function (req, res, next) {
   try {
@@ -52,7 +52,7 @@ exports.getTask = function (req, res, next) {
     // TODO use restify HttpError
     res.send(404, e);
   }
-}
+};
 
 exports.testTask = function (req, res, next) {
   try {
@@ -67,12 +67,13 @@ exports.testTask = function (req, res, next) {
     // TODO use restify HttpError
     res.send(404, e);
   }
-}
+};
 
 exports.runTask = function (req, res, next) {
   try {
     var opt = {};
 
+    // TODO impl async, async-force
     switch (req.params.opt) {
       case 'async':
         opt.async = true;
@@ -99,7 +100,7 @@ exports.runTask = function (req, res, next) {
     // TODO use restify HttpError
     res.send(404, e);
   }
-}
+};
 
 exports.removeTask = function (req, res, next) {
   try {
@@ -110,4 +111,4 @@ exports.removeTask = function (req, res, next) {
     // TODO use restify HttpError
     res.send(e);
   }
-}
+};
