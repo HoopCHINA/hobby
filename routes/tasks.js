@@ -109,3 +109,14 @@ exports.removeTask = function (req, res, next) {
     res.send(e);
   }
 };
+
+exports.patchTask = function (req, res, next) {
+  try {
+    // TODO patch
+    res.send('+OK');
+  }
+  catch (e) {
+    // TODO use restify HttpError
+    res.send(e);
+  }
+};
