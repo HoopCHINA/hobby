@@ -71,30 +71,27 @@ exports.testTask = function (req, res, next) {
 
 exports.runTask = function (req, res, next) {
   try {
-    var opt = {};
-
-    // TODO impl async, async-force
-    switch (req.params.opt) {
-      case 'async':
-        opt.async = true;
-        break;
-
-      case 'force':
-        opt.force = true;
-        break;
-
-      case 'async-force':
-        opt.async = true;
-        opt.force = true;
-        break;
+    if (req.params.opt === 'async') {
+      tasks.run(req.params.name);
+      res.send('+OK');
+    }
+    else if (req.params.opt === 'force') {
+      tasks.run(req.params.name, {force: true}, cb);
+    }
+    else if (req.params.opt === 'async-force') {
+      tasks.run(req.params.name, {force: true});
+      res.send('+OK');
+    }
+    else {
+      tasks.run(req.params.name, cb);
     }
 
-    tasks.run(req.params.name, opt, function (err, headers, body, modified) {
+    function cb(err, headers, body, modified) {
       if (err)
         res.send(err);
       else
         res.send({headers: headers, body: body, modified: modified});
-    });
+    }
   }
   catch (e) {
     // TODO use restify HttpError
