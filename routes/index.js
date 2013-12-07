@@ -14,7 +14,6 @@ module.exports = function (server) {
   server.get('/task/:name/run/:opt', tasks.runTask);
   server.del('/task/:name', tasks.removeTask);
   server.patch('/task/:name', tasks.patchTask);
-
-  // Stats
+  // Monit
   server.get('/stats', monit.stats);
 };
