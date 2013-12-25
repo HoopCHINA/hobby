@@ -7,7 +7,7 @@
     "hobby": "bin/hobby"
   },
   "dependencies": {
-    "restify": "~2.6.0",
+    "restify": "~2.6.1",
     "request": "~2.27.0",
     "level": "~0.16.0"
   },
